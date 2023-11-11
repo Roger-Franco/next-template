@@ -8,3 +8,6 @@ nom run dev (startar o sistema e instala o typescipt se criamos o arquivo da lin
 npm install -D tailwindcss postcss autoprefixer
 
 npx tailwindcss init -p
+
+
+icons: https://heroicons.com/
