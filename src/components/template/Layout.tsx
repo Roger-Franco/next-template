@@ -19,7 +19,6 @@ export default function Layout(props: LayoutProps) {
         <Conteudo>
           {props.children}
         </Conteudo>
-        <div className='dark:text-red-900'>hello world</div>
       </div>
     </div>
   )
