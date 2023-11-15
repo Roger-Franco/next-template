@@ -13,3 +13,5 @@ npx tailwindcss init -p
 icons: https://heroicons.com/
 
 npm i firebase@8.8.0
+
+npm i js-cookie
