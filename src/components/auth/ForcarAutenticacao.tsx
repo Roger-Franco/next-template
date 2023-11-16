@@ -2,6 +2,7 @@ import Image from 'next/image'
 import loading from '../../../public/images/loading.gif'
 import useAuth from '../../data/hook/useAuth'
 import router from 'next/router'
+import Head from 'next/head'
 
 export default function ForcarAutenticacao(props) {
   const {usuario, carregando} = useAuth()
@@ -9,6 +10,17 @@ export default function ForcarAutenticacao(props) {
   function renderizarConteudo() {
     return(
       <>  
+        <Head>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                if(!document.cookie?.includes('admin-template-frank-aut')){
+                  window.location.href = '/autenticacao'
+                }
+              `
+            }}
+          />
+        </Head>
         {props.children}
       </>
     )
@@ -25,7 +37,6 @@ export default function ForcarAutenticacao(props) {
   )
 }
 
-console.log(carregando, usuario)
 
 if(!carregando && usuario?.email) {
   return renderizarConteudo()
