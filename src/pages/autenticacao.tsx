@@ -5,7 +5,7 @@ import useAuth from '../data/hook/useAuth'
 
 export default function Autenticacao() {
 
-  const {usuario, loginGoogle} = useAuth()
+  const {login, cadastrar, loginGoogle} = useAuth()
 
   const [erro, setErro] = useState(null)
   const [email, setEmail] = useState('')
@@ -17,14 +17,27 @@ export default function Autenticacao() {
     setTimeout(() => setErro(null), tempoEmSegundos * 1000)
   }
 
-  function submeter() {
-    if(modo === 'login') {
-      console.log('login')
-      // exibirErro('Ocorreu um erro no Login!')
-    } else {
-      console.log('cadastrar')
-      // exibirErro('Ocorreu um erro no Cadastro!')
+  async function submeter() {
+    try {
+      if(modo === 'login') {
+        console.log('login')
+        // exibirErro('Ocorreu um erro no Login!')
+        await login(email, senha)
+      } else {
+        console.log('cadastrar')
+        await cadastrar(email, senha)
+        // exibirErro('Ocorreu um erro no Cadastro!')
 
+      }
+    } catch (error) {
+      // let message
+      // if(error instanceof Error) message = error.message
+      // else message = String(error)
+      // exibirErro(message)
+      // console.log(e)
+      // exibirErro(e.message.error)
+      // exibirErro(error?.message ?? 'Erro desconhecido!')
+      exibirErro('Erro ao tentar logar!')
     }
   }
 
@@ -77,6 +90,24 @@ export default function Autenticacao() {
         `}>
         Entrar com Google
         </button>
+
+        {modo === 'login' ? (
+                    <p className="mt-8">
+                        Novo por aqui?
+                        <a onClick={() => setModo('cadastro')} className={`
+                            text-blue-500 hover:text-blue-700 font-semibold
+                            cursor-pointer
+                        `}> Crie um Conta Gratuitamente</a>
+                    </p>
+                ) : (
+                    <p className="mt-8">
+                        Já faz parte da nossa comunidade?
+                        <a onClick={() => setModo('login')} className={`
+                            text-blue-500 hover:text-blue-700 font-semibold
+                            cursor-pointer
+                        `}> Entre com a suas Credenciais</a>
+                    </p>
+                )}
       </div>
     </div>
   )
